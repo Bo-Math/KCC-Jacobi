@@ -1,0 +1,55 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Input: a set of equations G^i in a system of SODEs
+Output: the deviation curvature tensor (P_j^i)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+KCC_invariant := proc(G) 
+local n, i, j, l, N, g, P, p; 
+global x, y; 
+
+n := nops(G); 
+for i to n do 
+for j to n do 
+for l to n do 
+N[i, j] := diff(G[i], y[j]); 
+g[i, j, l] := diff(N[i, j], y[l]); 
+end do; end do; end do; 
+
+for i to n do 
+for j to n do 
+P[i, j] := -2*diff(G[i], x[j]); 
+for l to n do 
+P[i, j] := y[l]*diff(N[i, j], x[l]) + N[i, l]*N[l, j] - 2*G[l]*g[i, j, l] + P[i, j]; 
+end do; end do; end do; 
+
+p := (i, j) -> P[i, j]; 
+return Matrix(n, p); 
+end proc;
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Input: a set of equations G^i in a system of SODEs
+Output: a list of the deviation equations \xi_i
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+KCC_deviation:= proc(G) 
+local n, i, j, N, F; 
+global x, y, t; 
+
+n := nops(G); 
+for i to n do 
+for j to n do 
+N[i, j] := diff(G[i], y[j]); 
+end do; end do; 
+
+for i to n do 
+F[i] := Diff(xi[i], t $ 2); 
+for j to n do 
+F[i] := 2*N[i, j]*Diff(xi[i], t) + 2*diff(G[i], x[j])*xi[j] + F[i]; 
+end do; end do; 
+
+return [seq(F[i], i = 1 .. n)]; 
+end proc;
+
