@@ -1,8 +1,8 @@
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Input: a set of equations G^i in a system of SODEs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Input: a set of equations G^i in a system of second order ODEs
 Output: the deviation curvature tensor (P_j^i)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 KCC_invariant := proc(G) 
 local n, i, j, l, N, g, P, p; 
@@ -29,10 +29,10 @@ end proc;
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Input: a set of equations G^i in a system of SODEs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Input: a set of equations G^i in a system of second order ODEs
 Output: a list of the deviation equations \xi_i
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 KCC_deviation := proc(G) 
 local n, i, j, N, u, NN, V1, V2, V3, Jac, deviations; 
